@@ -1,30 +1,45 @@
 <script>
-	export let name;
+  import { getTopWallpaper } from "./services/reddit.js";
+  import { onMount } from "svelte";
+
+  let bg = null;
+
+  onMount(async () => {
+    const bgResponse = await getTopWallpaper();
+    bg = bgResponse.data.children[0].data.url;
+    console.log(bg);
+  });
+
 </script>
 
-<main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+<main class="overlay">
+  <div class="bg" style="background-image: url('{bg}');">
+  </div>
 </main>
 
 <style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
+  :global(html){
+    padding: 0;
+    margin: 0;
+  }
+  .overlay {
+    height: 100vh;
+    width: 100vw;
+    background: rgba(0, 0, 0, 0.3);
+  }
+  .bg {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    animation: fadeIn 1s;
+  }
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 </style>
