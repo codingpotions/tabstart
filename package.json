@@ -4,6 +4,9 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
+    "release:patch": "standard-version --release-as patch --skip.tag --skip.changelog",
+    "release:minor": "standard-version --release-as minor",
+    "release:major": "standard-version --release-as major",
     "start": "sirv public --no-clear"
   },
   "devDependencies": {
@@ -14,9 +17,47 @@
     "rollup-plugin-livereload": "^2.0.0",
     "rollup-plugin-svelte": "^7.0.0",
     "rollup-plugin-terser": "^7.0.0",
+    "standard-version": "^9.3.0",
     "svelte": "^3.0.0"
   },
   "dependencies": {
     "sirv-cli": "^1.0.0"
+  },
+  "standard-version": {
+    "types": [
+      {
+        "type": "feat",
+        "section": "✨ New features"
+      },
+      {
+        "type": "fix",
+        "section": "🐛 Bug fixes"
+      },
+      {
+        "type": "chore",
+        "hidden": true
+      },
+      {
+        "type": "docs",
+        "hidden": true
+      },
+      {
+        "type": "refactor",
+        "hidden": true
+      },
+      {
+        "type": "release",
+        "hidden": true
+      },
+      {
+        "type": "revert",
+        "hidden": true
+      },
+      {
+        "type": "test",
+        "hidden": true
+      }
+    ],
+    "releaseCommitMessageFormat": "release(root): {{currentTag}}"
   }
 }
