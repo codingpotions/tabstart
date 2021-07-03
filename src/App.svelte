@@ -12,10 +12,12 @@
 
 </script>
 
-<main class="overlay">
+<main>
   <div class="bg" style="background-image: url('{bg}');">
-    <div class="clock-container">
-      <Clock />
+    <div class="content">
+      <div class="clock-container">
+        <Clock />
+      </div>
     </div>
   </div>
 </main>
@@ -25,10 +27,9 @@
     padding: 0;
     margin: 0;
   }
-  .overlay {
+  main {
     height: 100vh;
     width: 100vw;
-    background: rgba(0, 0, 0, 0.3);
   }
   .bg {
     width: 100%;
@@ -37,6 +38,20 @@
     background-size: cover;
     animation: fadeIn 1s;
     overflow: hidden;
+    position: relative;
+  }
+  .bg::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.3);
+  }
+  .content {
+    position: relative;
+    z-index: 1;
   }
   .clock-container {
     text-align: center;
