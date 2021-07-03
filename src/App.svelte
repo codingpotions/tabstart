@@ -1,19 +1,22 @@
 <script>
   import { getTopWallpaper } from "./services/reddit.js";
   import { onMount } from "svelte";
+  import Clock from "./Clock.svelte";
 
   let bg = null;
 
   onMount(async () => {
     const bgResponse = await getTopWallpaper();
     bg = bgResponse.data.children[0].data.url;
-    console.log(bg);
   });
 
 </script>
 
 <main class="overlay">
   <div class="bg" style="background-image: url('{bg}');">
+    <div class="clock-container">
+      <Clock />
+    </div>
   </div>
 </main>
 
@@ -33,6 +36,11 @@
     background-position: center;
     background-size: cover;
     animation: fadeIn 1s;
+    overflow: hidden;
+  }
+  .clock-container {
+    text-align: center;
+    margin-top: 10rem;
   }
   @keyframes fadeIn {
     0% {
