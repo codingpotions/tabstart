@@ -3,6 +3,7 @@
 .nyc_output
 .vscode
 node_modules
+public
 *.map
 /src/compiler/compile/internal_exports.ts
 /compiler.d.ts
