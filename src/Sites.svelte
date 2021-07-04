@@ -4,15 +4,26 @@
 
   let sites = [];
 
-  onMount(async () => {
-    browser.topSites.get().then(mostVisitedURL => {
-      sites = mostVisitedURL.map(site => {
-        const regex = /^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?([^:\/?\n]+)/g;
-        const domain = regex.exec(site.url)[1];
-        return {...site, domain }
-      })
-      sites = sites.filter(site => !site.domain.includes("localhost"));
+  function parseSites(sitesList) {
+    sites = sitesList.map(site => {
+      const regex = /^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?([^:\/?\n]+)/g;
+      const domain = regex.exec(site.url)[1];
+      return {...site, domain };
     });
+    sites = sites.filter(site => !site.domain.includes("localhost"));
+  }
+
+  onMount(async () => {
+    const isFirefox = navigator.userAgent.toLowerCase().indexOf("firefox") > -1;
+    if (isFirefox) {
+      browser.topSites.get().then(mostVisitedURL => {
+        parseSites(mostVisitedURL);
+      });
+    } else {
+      chrome.topSites.get(mostVisitedURL => {
+        parseSites(mostVisitedURL);
+      });
+    }
   });
 
 </script>
