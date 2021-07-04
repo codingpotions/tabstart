@@ -2,6 +2,7 @@
   import { getTopWallpaper } from "./services/reddit.js";
   import { onMount } from "svelte";
   import Clock from "./Clock.svelte";
+  import Sites from "./Sites.svelte";
 
   let bg = null;
 
@@ -17,6 +18,9 @@
     <div class="content">
       <div class="clock-container">
         <Clock />
+      </div>
+      <div class="sites-container">
+        <Sites />
       </div>
     </div>
   </div>
@@ -55,6 +59,9 @@
   }
   .clock-container {
     text-align: center;
+  }
+  .clock-container,
+  .sites-container {
     margin-top: 10rem;
   }
   @keyframes fadeIn {
