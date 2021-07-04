@@ -3,8 +3,15 @@
   import { onMount } from "svelte";
   import Clock from "./Clock.svelte";
   import Sites from "./Sites.svelte";
+  import Settings from "./Settings.svelte";
+  import { gear, close } from "./assets/icons";
 
   let bg = null;
+  let isSettingsOpen = false;
+
+  function toggleOpenSettings() {
+    isSettingsOpen = !isSettingsOpen;
+  }
 
   onMount(async () => {
     const bgResponse = await getTopWallpaper();
@@ -15,14 +22,25 @@
 
 <main>
   <div class="bg" style="background-image: url('{bg}');">
-    <div class="content">
-      <div class="clock-container">
-        <Clock />
-      </div>
-      <div class="sites-container">
-        <Sites />
-      </div>
+    <div class="settings-icon" on:click={toggleOpenSettings}>
+      {#if !isSettingsOpen }
+        {@html gear}
+      {:else }
+        {@html close}
+      {/if }
     </div>
+    {#if !isSettingsOpen }
+      <div class="content">
+        <div class="clock-container">
+          <Clock />
+        </div>
+        <div class="sites-container">
+          <Sites />
+        </div>
+      </div>
+    {:else }
+      <Settings />
+    {/if }
   </div>
 </main>
 
@@ -40,7 +58,7 @@
     height: 100%;
     background-position: center;
     background-size: cover;
-    animation: fadeIn 1s;
+    animation: fadeIn 1.5s;
     overflow: hidden;
     position: relative;
   }
@@ -52,6 +70,19 @@
     top: 0;
     left: 0;
     background: rgba(0, 0, 0, 0.3);
+  }
+  .settings-icon {
+    position: fixed;
+    right: 1rem;
+    top: 1rem;
+    padding: 3rem;
+    z-index: 2;
+    cursor: pointer;
+  }
+  :global(.settings-icon svg) {
+    fill: white;
+    width: 32px;
+    height: 32px;
   }
   .content {
     position: relative;
