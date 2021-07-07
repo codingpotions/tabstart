@@ -1,14 +1,15 @@
 <script>
   import Slider from "./Slider.svelte";
-  import { sitesCount } from './store/settings.js';
+  import { settings } from './store/settings.js';
   import { onDestroy } from "svelte";
 
-  let sitesCountValue = 0;
-  const unsubscribe = sitesCount.subscribe(value => sitesCountValue = value)
+  let settingsValue = 0;
+  const unsubscribe = settings.subscribe(value => settingsValue = value)
   onDestroy(unsubscribe)
 
   function storeSitesCount(e) {
-    sitesCount.update(n => parseInt(e.detail.value));
+    const newValue = parseInt(e.detail.value);
+    settings.update(n => ({...n, sitesCount: newValue}));
   }
 
 </script>
@@ -18,7 +19,7 @@
     <h2 class="title">Settings</h2>
     <div class="columns">
       <div class="left">
-        <Slider label="Number of sites" value="{sitesCountValue}" on:updated={storeSitesCount} />
+        <Slider label="Number of sites" value="{settingsValue.sitesCount}" on:updated={storeSitesCount} />
       </div>
       <div class="right">
       </div>

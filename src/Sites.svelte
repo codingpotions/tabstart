@@ -1,13 +1,13 @@
 
 <script>
   import { onMount } from "svelte";
-  import { sitesCount } from './store/settings.js';
+  import { settings } from './store/settings.js';
   import { onDestroy } from "svelte";
 
   let sites = [];
 
-  let sitesCountValue = 0;
-  const unsubscribe = sitesCount.subscribe(value => sitesCountValue = value)
+  let settingsValue = 0;
+  const unsubscribe = settings.subscribe(value => settingsValue = value)
   onDestroy(unsubscribe)
 
   function parseSites(sitesList) {
@@ -17,7 +17,7 @@
       return {...site, domain };
     });
     sites = sites.filter(site => !site.domain.includes("localhost"));
-    sites = sites.slice(0, sitesCountValue);
+    sites = sites.slice(0, settingsValue.sitesCount);
   }
 
   onMount(async () => {
