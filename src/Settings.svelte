@@ -3,9 +3,14 @@
   import { settings } from './store/settings.js';
   import { onDestroy } from "svelte";
 
-  let settingsValue = 0;
-  const unsubscribe = settings.subscribe(value => settingsValue = value)
-  onDestroy(unsubscribe)
+  let settingsValue = {};
+
+  const unsubscribe = settings.subscribe(async settingsStore => {
+    const newValue = await settingsStore;
+    settingsValue = newValue;
+  });
+  
+  onDestroy(unsubscribe);
 
   function storeSitesCount(e) {
     const newValue = parseInt(e.detail.value);

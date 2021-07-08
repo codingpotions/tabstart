@@ -19,15 +19,15 @@
   })
 
   $: if (value) {
-     updateValue();
+     updateValue(value);
    };
 
-  function updateValue() {
+  function updateValue(newValue) {
     if (slider) {
       const srcElement = slider;
       const min = parseInt(srcElement.min);
       const max = parseInt(srcElement.max);
-      const value = parseInt(srcElement.value);
+      const value = newValue ? newValue : parseInt(srcElement.value);
       const percent = (value - min) / (max - min) * 100;
       srcElement.style.background = "linear-gradient(to right, #82CFD0 0%, #82CFD0 " + percent + "%, #fff " + percent + "%, white 100%)";
     }

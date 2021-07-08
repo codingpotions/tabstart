@@ -1,37 +1,20 @@
 
 <script>
-  import { onMount } from "svelte";
   import { settings } from './store/settings.js';
   import { onDestroy } from "svelte";
 
-  let sites = [];
+  let settingsValue = { sites: [] };
 
-  let settingsValue = 0;
-  const unsubscribe = settings.subscribe(value => settingsValue = value)
-  onDestroy(unsubscribe)
+  settings.subscribe(async value => settingsValue = await value);
 
-  function parseSites(sitesList) {
-    sites = sitesList.map(site => {
-      const regex = /^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?([^:\/?\n]+)/g;
-      const domain = regex.exec(site.url)[1];
-      return {...site, domain };
-    });
-    sites = sites.filter(site => !site.domain.includes("localhost"));
-    sites = sites.slice(0, settingsValue.sitesCount);
-  }
-
-  onMount(async () => {
-    const isFirefox = navigator.userAgent.toLowerCase().indexOf("firefox") > -1;
-    if (isFirefox) {
-      browser.topSites.get().then(mostVisitedURL => {
-        parseSites(mostVisitedURL);
-      });
-    } else {
-      chrome.topSites.get(mostVisitedURL => {
-        parseSites(mostVisitedURL);
-      });
-    }
+  const unsubscribe = settings.subscribe(async settingsStore => {
+    const newValue = await settingsStore;
+    settingsValue = newValue;
   });
+  
+  onDestroy(unsubscribe);
+
+  $: sites = settingsValue.sites.slice(0, settingsValue.sitesCount);
 
 </script>
 
