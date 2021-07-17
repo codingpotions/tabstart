@@ -26,7 +26,7 @@ Go to manage extensions and then click on the gear icon > debug extensions > loa
 
 Now select the manifest file inside the public folder.
 
-## Debug in firefox
+## Debug in chrome
 
 Go to Settings > Load unpacked.
 
