@@ -2,6 +2,7 @@
 <script>
   import {onMount} from "svelte";
   import { createEventDispatcher } from "svelte";
+  import { linearMap } from "./logic/helpers.js";
 
   const dispatch = createEventDispatcher();
 
@@ -17,6 +18,13 @@
   onMount(() => {
     updateValue();
   })
+
+  $: currentValuePercent = () => {
+    const currentPercent = (value - min) / (max - min) * 100;
+
+    // TODO: Magic number
+    return linearMap(currentPercent, 0, 100, 1.1, 98.9);
+  }
 
   $: if (value) {
      updateValue(value);
@@ -44,6 +52,9 @@
   {#if label }
     <label for="#{id}">{label}</label>
   {/if }
+  {#if value }
+    <div class="current-value" style="left: {currentValuePercent()}%">{value}</div>
+  {/if }
   <input id="{id}" on:input="{sliderHandler}" bind:this={slider} type="range" min="{min}" max="{max}" value="{value}" class="slider">
   <div class="values">
     <div class="min">{min}</div>
@@ -52,6 +63,9 @@
 </div>
 
 <style>
+  .slider-container {
+    position: relative;
+  }
   label {
     margin-bottom: 0.5rem;
     font-weight: bold;
@@ -69,6 +83,11 @@
     transition: background 450ms ease-in;
     -webkit-appearance: none;
     width: 100%;
+    margin-top: 2rem;
+  }
+  .current-value {
+    position: absolute;
+    transform: translateX(-50%);
   }
   .values {
     display: flex;

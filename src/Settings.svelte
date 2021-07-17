@@ -2,6 +2,7 @@
   import Slider from "./Slider.svelte";
   import { settings } from './store/settings.js';
   import { onDestroy } from "svelte";
+  import { linearMap } from "./logic/helpers.js";
 
   let settingsValue = {};
 
@@ -24,7 +25,7 @@
     <h2 class="title">Settings</h2>
     <div class="columns">
       <div class="left">
-        <Slider label="Number of sites" value="{settingsValue.sitesCount}" on:updated={storeSitesCount} />
+        <Slider label="Number of sites" value="{settingsValue.sitesCount}" on:updated={storeSitesCount} min="{1}"/>
       </div>
       <div class="right">
       </div>
