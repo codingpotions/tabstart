@@ -5,6 +5,7 @@
   import Sites from "./Sites.svelte";
   import Settings from "./Settings.svelte";
   import { gear, close } from "./assets/icons";
+  import { emojis } from "./logic/emojis";
 
   let bg = null;
   let isSettingsOpen = false;
@@ -16,6 +17,7 @@
   onMount(async () => {
     const bgResponse = await getTopWallpaper();
     bg = bgResponse.data.children[0].data.url;
+    document.title = "New tab " + emojis[Math.floor(Math.random() * emojis.length)];
   });
 
 </script>

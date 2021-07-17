@@ -3,6 +3,7 @@ import { asyncable } from "svelte-asyncable";
 
 export const settings = asyncable(async () => {
   let storedSettings = JSON.parse(localStorage.getItem("settings"));
+  console.log(storedSettings)
   if (!storedSettings) {
     const savedSettings = await loadMostUsedSites();
     storedSettings = savedSettings;
@@ -16,6 +17,8 @@ async function loadMostUsedSites() {
   return new Promise(async (resolve, reject) => {
     let sites = null;
     const isFirefox = navigator.userAgent.toLowerCase().indexOf("firefox") > -1;
+    console.log(isFirefox)
+    console.log(chrome)
     if (isFirefox) {
       const mostVisitedURL = await browser.topSites.get();
       sites = parseSites(mostVisitedURL);
