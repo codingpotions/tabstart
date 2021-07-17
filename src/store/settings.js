@@ -29,7 +29,7 @@ async function loadMostUsedSites() {
   });
 }
 
-function parseSites(sitesList) {
+export function parseSites(sitesList) {
   return sitesList.map(site => {
     const regex = /^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?([^:\/?\n]+)/g;
     const domain = regex.exec(site.url)[1];
