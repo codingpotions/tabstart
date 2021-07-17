@@ -2,7 +2,6 @@
   import Slider from "./Slider.svelte";
   import { settings } from './store/settings.js';
   import { onDestroy } from "svelte";
-  import { linearMap } from "./logic/helpers.js";
 
   let settingsValue = {};
 
@@ -18,6 +17,11 @@
     settings.update(n => ({...n, sitesCount: newValue}));
   }
 
+  function storeSitesIconSize(e) {
+    const newValue = parseInt(e.detail.value);
+    settings.update(n => ({...n, sitesIconSize: newValue}));
+  }
+
 </script>
 
 <div class="settings">
@@ -25,7 +29,8 @@
     <h2 class="title">Settings</h2>
     <div class="columns">
       <div class="left">
-        <Slider label="Number of sites" value="{settingsValue.sitesCount}" on:updated={storeSitesCount} min="{1}"/>
+        <Slider label="Number of sites" value="{settingsValue.sitesCount}" on:updated={storeSitesCount} min="{1}" />
+        <Slider label="Sites icon size" value="{settingsValue.sitesIconSize}" on:updated={storeSitesIconSize} min="{24}" max={256} />
       </div>
       <div class="right">
       </div>

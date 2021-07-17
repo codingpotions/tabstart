@@ -94,6 +94,7 @@
   .clock-container,
   .sites-container {
     margin-top: 10rem;
+    padding: 0 10%;
   }
   @keyframes fadeIn {
     0% {

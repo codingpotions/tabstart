@@ -45,6 +45,7 @@ function saveSettings(settingsToSave) {
 }
 
 function defaultSettings(oldSettings = {}) {
+  oldSettings = setDefaultValue(oldSettings, "sitesIconSize", 128);
   oldSettings = setDefaultValue(oldSettings, "sitesCount", 6);
   oldSettings = setDefaultValue(oldSettings, "sites", []);
   return oldSettings;

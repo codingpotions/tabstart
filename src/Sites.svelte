@@ -15,14 +15,15 @@
   onDestroy(unsubscribe);
 
   $: sites = settingsValue.sites.slice(0, settingsValue.sitesCount);
+  $: sitesIconSize = settingsValue.sitesIconSize;
 
 </script>
 
 {#if sites.length }
-  <div class="sites">
+  <div class="sites" style="grid-template-columns: repeat(auto-fit, minmax(24px, {settingsValue.sitesIconSize}px));">
     {#each sites as site}
       <a href="{site.url}">
-        <img src="https://logo.clearbit.com/{site.domain}?s=128" alt="{site.title}">
+        <img src="https://logo.clearbit.com/{site.domain}?s=256" alt="{site.title}">
       </a>
     {/each}
   </div>
@@ -32,7 +33,7 @@
   .sites {
     display: grid;
     grid-gap: 2rem;
-    grid-template-columns: repeat(auto-fit, minmax(64px, 128px));
+    
     justify-content: center;
   }
   .sites > a,
