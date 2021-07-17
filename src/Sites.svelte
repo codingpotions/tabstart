@@ -20,10 +20,10 @@
 </script>
 
 {#if sites.length }
-  <div class="sites" style="grid-template-columns: repeat(auto-fit, minmax(24px, {settingsValue.sitesIconSize}px));">
+  <div class="sites" style="grid-template-columns: repeat(auto-fit, minmax(24px, {sitesIconSize}px));">
     {#each sites as site}
       <a href="{site.url}">
-        <img src="https://logo.clearbit.com/{site.domain}?s=256" alt="{site.title}">
+        <img style="width: {sitesIconSize}px; height: {sitesIconSize}px;" src="https://logo.clearbit.com/{site.domain}?s=256" alt="{site.title}">
       </a>
     {/each}
   </div>
@@ -37,6 +37,6 @@
   }
   .sites > a,
   .sites > a > img {
-    width: 100%;
+    object-fit: cover;
   }
 </style>
