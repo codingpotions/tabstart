@@ -33,7 +33,6 @@
   .sites {
     display: grid;
     grid-gap: 2rem;
-    
     justify-content: center;
   }
   .sites > a,

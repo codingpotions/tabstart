@@ -67,7 +67,6 @@
     position: relative;
   }
   label {
-    margin-bottom: 0.5rem;
     font-weight: bold;
   }
   label:first-letter {

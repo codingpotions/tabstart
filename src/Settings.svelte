@@ -12,14 +12,9 @@
   
   onDestroy(unsubscribe);
 
-  function storeSitesCount(e) {
+  function storeValue(e, key) {
     const newValue = parseInt(e.detail.value);
-    settings.update(n => ({...n, sitesCount: newValue}));
-  }
-
-  function storeSitesIconSize(e) {
-    const newValue = parseInt(e.detail.value);
-    settings.update(n => ({...n, sitesIconSize: newValue}));
+    settings.update(n => ({...n, [key]: newValue}));
   }
 
 </script>
@@ -29,8 +24,9 @@
     <h2 class="title">Settings</h2>
     <div class="columns">
       <div class="left">
-        <Slider label="Number of sites" value="{settingsValue.sitesCount}" on:updated={storeSitesCount} min="{1}" />
-        <Slider label="Sites icon size" value="{settingsValue.sitesIconSize}" on:updated={storeSitesIconSize} min="{24}" max={256} />
+        <Slider class="form-control" label="Clock size" value="{settingsValue.clockSize}" on:updated={e => storeValue(e, "clockSize")} min="{1}" />
+        <Slider class="form-control" label="Number of sites" value="{settingsValue.sitesCount}" on:updated={e => storeValue(e, "sitesCount")} min="{1}" />
+        <Slider class="form-control" label="Sites icon size" value="{settingsValue.sitesIconSize}" on:updated={e => storeValue(e, "sitesIconSize")} min="{24}" max={256} />
       </div>
       <div class="right">
       </div>
@@ -56,5 +52,8 @@
   }
   .title {
     font-size: 3rem;
+  }
+  .left > :global(* + *) {
+    margin-top: 3rem;
   }
 </style>
