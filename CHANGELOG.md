@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.5.0](https://github.com/codingpotions/tabstart/compare/v0.4.0...v0.5.0) (2021-11-27)
+
+
+### ✨ New features
+
+* The user can modify the icon URL of the sites ([84c4509](https://github.com/codingpotions/tabstart/commit/84c45090b5788c0c9d4c0090b5d3cee0045d8bb7))
+
 ## [0.4.0](https://github.com/codingpotions/tabstart/compare/v0.3.0...v0.4.0) (2021-07-17)
 
 
