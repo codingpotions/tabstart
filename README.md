@@ -4,6 +4,8 @@ Tabstart is a new tab replacement page. At the moment it displays a random image
 
 ![](./screenshot.png)
 
+[Download for Firefox](https://addons.mozilla.org/es/firefox/addon/tabstart/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search)
+
 [CHANGELOG](./CHANGELOG.md)
 
 ## Installation from source
