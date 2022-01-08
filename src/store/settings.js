@@ -6,9 +6,6 @@ export const settings = asyncable(
     let storedSettings = JSON.parse(localStorage.getItem("settings"));
     if (!storedSettings) {
       let savedSettings = await loadMostUsedSites();
-      if (!savedSettings || !savedSettings.length) {
-        savedSettings = new Array(10).fill({ site: "", domain: "", icon: ""});
-      }
       storedSettings = savedSettings;
     }
     return storedSettings;
@@ -20,7 +17,8 @@ async function loadMostUsedSites() {
   return new Promise(async (resolve, reject) => {
     let sites = null;
     if (typeof browser === "undefined") {
-      return Promise.resolve([]);
+      const savedSettings = saveSettings({ sites: new Array(10).fill({ url: "", icon: "" }) });
+      return Promise.resolve(savedSettings);
     }
     const isFirefox = navigator.userAgent.toLowerCase().indexOf("firefox") > -1;
     if (isFirefox) {
