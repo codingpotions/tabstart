@@ -43,6 +43,10 @@
     {:else }
       <Settings />
     {/if }
+    <form action="https://www.google.com/search" method="get" class="google-search">
+      <input type="text" name="q" autofocus="autofocus" />
+      <input type="submit" value="" />
+    </form>
   </div>
 </main>
 
@@ -97,6 +101,25 @@
   .sites-container {
     margin-top: 10rem;
     padding: 0 10%;
+  }
+  .google-search {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .google-search input,
+  .google-search input:focus {
+    width: 400px;
+    background: none;
+    border: none;
+    color: white;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+    outline: none;
+  }
+  .google-search input[type="submit"] {
+    width: 0;
+    opacity: 0;
   }
   @keyframes fadeIn {
     0% {
